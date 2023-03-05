@@ -1,0 +1,282 @@
+## This file contains all the build statements describing the
+# compilation DAG.
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# 
+# Which is the root file.
+# =============================================================================
+
+# =============================================================================
+# Project: Otodecks
+# Configurations: Debug
+# =============================================================================
+
+#############################################
+# Minimal version of Ninja required by this file
+
+ninja_required_version = 1.5
+
+
+#############################################
+# Set configuration variable for custom commands.
+
+CONFIGURATION = Debug
+# =============================================================================
+# Include auxiliary files.
+
+
+#############################################
+# Include rules file.
+
+include CMakeFiles/rules.ninja
+
+# =============================================================================
+
+#############################################
+# Logical path to working directory; prefix for absolute paths.
+
+cmake_ninja_workdir = /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/
+# =============================================================================
+# Object build statements for EXECUTABLE target Otodecks
+
+
+#############################################
+# Order-only phony target for Otodecks
+
+build cmake_object_order_depends_target_Otodecks: phony || CMakeFiles/Otodecks.dir
+
+build CMakeFiles/Otodecks.dir/Source/DeckGUI.cpp.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/Source/DeckGUI.cpp || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/Source/DeckGUI.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/Source
+
+build CMakeFiles/Otodecks.dir/Source/DJAudioPlayer.cpp.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/Source/DJAudioPlayer.cpp || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/Source/DJAudioPlayer.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/Source
+
+build CMakeFiles/Otodecks.dir/Source/WaveformDisplay.cpp.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/Source/WaveformDisplay.cpp || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/Source/WaveformDisplay.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/Source
+
+build CMakeFiles/Otodecks.dir/Source/Main.cpp.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/Source/Main.cpp || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/Source/Main.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/Source
+
+build CMakeFiles/Otodecks.dir/Source/MainComponent.cpp.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/Source/MainComponent.cpp || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/Source/MainComponent.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/Source
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_basics.mm.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_audio_basics.mm || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_basics.mm.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_devices.mm.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_audio_devices.mm || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_devices.mm.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_formats.mm.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_audio_formats.mm || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_formats.mm.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_processors.mm.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_audio_processors.mm || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_processors.mm.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_processors_ara.cpp.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_audio_processors_ara.cpp || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_processors_ara.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_processors_lv2_libs.cpp.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_audio_processors_lv2_libs.cpp || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_processors_lv2_libs.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_utils.mm.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_audio_utils.mm || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_utils.mm.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_core.mm.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_core.mm || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_core.mm.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_data_structures.mm.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_data_structures.mm || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_data_structures.mm.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_events.mm.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_events.mm || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_events.mm.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_graphics.mm.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_graphics.mm || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_graphics.mm.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_gui_basics.mm.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_gui_basics.mm || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_gui_basics.mm.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+build CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_gui_extra.mm.o: CXX_COMPILER__Otodecks_Debug /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode/include_juce_gui_extra.mm || cmake_object_order_depends_target_Otodecks
+  DEFINES = -DDEBUG=1 -DJUCE_DISPLAY_SPLASH_SCREEN=1 -DJUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1 -DJUCE_MODULE_AVAILABLE_juce_audio_basics=1 -DJUCE_MODULE_AVAILABLE_juce_audio_devices=1 -DJUCE_MODULE_AVAILABLE_juce_audio_formats=1 -DJUCE_MODULE_AVAILABLE_juce_audio_processors=1 -DJUCE_MODULE_AVAILABLE_juce_audio_utils=1 -DJUCE_MODULE_AVAILABLE_juce_core=1 -DJUCE_MODULE_AVAILABLE_juce_data_structures=1 -DJUCE_MODULE_AVAILABLE_juce_events=1 -DJUCE_MODULE_AVAILABLE_juce_graphics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_basics=1 -DJUCE_MODULE_AVAILABLE_juce_gui_extra=1 -DJUCE_STANDALONE_APPLICATION=1 -DJUCE_STRICT_REFCOUNTEDPOINTER=1 -DJUCE_USE_DARK_SPLASH_SCREEN=1 -D_DEBUG=1
+  DEP_FILE = CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_gui_extra.mm.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks  -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -std=c++17
+  INCLUDES = -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug/JuceLibraryCode -I/Users/ahmadnawazkhan/work/study-level5/OOP-final/JUCE/modules
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  OBJECT_FILE_DIR = CMakeFiles/Otodecks.dir/JuceLibraryCode
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Otodecks
+
+
+#############################################
+# Link the executable Otodecks.app/Contents/MacOS/Otodecks
+
+build Otodecks.app/Contents/MacOS/Otodecks: CXX_EXECUTABLE_LINKER__Otodecks_Debug CMakeFiles/Otodecks.dir/Source/DeckGUI.cpp.o CMakeFiles/Otodecks.dir/Source/DJAudioPlayer.cpp.o CMakeFiles/Otodecks.dir/Source/WaveformDisplay.cpp.o CMakeFiles/Otodecks.dir/Source/Main.cpp.o CMakeFiles/Otodecks.dir/Source/MainComponent.cpp.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_basics.mm.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_devices.mm.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_formats.mm.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_processors.mm.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_processors_ara.cpp.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_processors_lv2_libs.cpp.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_audio_utils.mm.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_core.mm.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_data_structures.mm.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_events.mm.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_graphics.mm.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_gui_basics.mm.o CMakeFiles/Otodecks.dir/JuceLibraryCode/include_juce_gui_extra.mm.o
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk
+  LINK_FLAGS = -stdlib=libc++ -mmacosx-version-min=10.11 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+  LINK_LIBRARIES = -weak_framework Metal  -weak_framework MetalKit  -framework  Accelerate  -framework  AudioToolbox  -framework  Cocoa  -framework  CoreAudio  -framework  CoreAudioKit  -framework  CoreMIDI  -framework  DiscRecording  -framework  Foundation  -framework  IOKit  -framework  QuartzCore  -framework  WebKit
+  LINK_PATH = -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks
+  OBJECT_DIR = CMakeFiles/Otodecks.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Otodecks.app/Contents/MacOS/Otodecks
+  TARGET_PDB = Otodecks.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build edit_cache: phony CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks -B/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build rebuild_cache: phony CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Target aliases.
+
+build Otodecks: phony Otodecks.app/Contents/MacOS/Otodecks
+
+# =============================================================================
+# Folder targets.
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/cmake-build-debug
+
+build all: phony Otodecks.app/Contents/MacOS/Otodecks
+
+# =============================================================================
+# Built-in targets
+
+
+#############################################
+# Re-run CMake if any of its inputs changed.
+
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/UnixPaths.cmake /Users/ahmadnawazkhan/work/study-level5/OOP-final/FRUT/prefix/FRUT/cmake/Reprojucer.cmake /Users/ahmadnawazkhan/work/study-level5/OOP-final/FRUT/prefix/FRUT/cmake/data/Info.plist.in /Users/ahmadnawazkhan/work/study-level5/OOP-final/FRUT/prefix/FRUT/cmake/data/JuceHeader.h.in /Users/ahmadnawazkhan/work/study-level5/OOP-final/FRUT/prefix/FRUT/cmake/data/JuceLibraryCode-Wrapper.cpp.in CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake Info-App.plist
+  pool = console
+
+
+#############################################
+# A missing CMake input file is not an error.
+
+build ../CMakeLists.txt /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/UnixPaths.cmake /Users/ahmadnawazkhan/work/study-level5/OOP-final/FRUT/prefix/FRUT/cmake/Reprojucer.cmake /Users/ahmadnawazkhan/work/study-level5/OOP-final/FRUT/prefix/FRUT/cmake/data/Info.plist.in /Users/ahmadnawazkhan/work/study-level5/OOP-final/FRUT/prefix/FRUT/cmake/data/JuceHeader.h.in /Users/ahmadnawazkhan/work/study-level5/OOP-final/FRUT/prefix/FRUT/cmake/data/JuceLibraryCode-Wrapper.cpp.in CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake Info-App.plist: phony
+
+
+#############################################
+# Clean all the built files.
+
+build clean: CLEAN
+
+
+#############################################
+# Print all primary targets available.
+
+build help: HELP
+
+
+#############################################
+# Make the all target the default.
+
+default all
