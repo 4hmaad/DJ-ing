@@ -46,6 +46,9 @@ jucer_project_files("Otodecks/Source"
   x         .         .         "Source/Main.cpp"
   .         .         .         "Source/MainComponent.h"
   x         .         .         "Source/MainComponent.cpp"
+  .         .         .         "Source/MainComponent.h"
+  .         .         .         "Source/PlaylistComponent.h"
+  x         .         .         "Source/PlaylistComponent.cpp"
 )
 
 jucer_project_module(
