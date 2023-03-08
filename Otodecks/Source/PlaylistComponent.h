@@ -29,8 +29,30 @@ public:
 
 private:
 
-    std::vector<std::string> trackTitles;
+    struct Track {
+        std::string id;
+        std::string title;
+        std::string album;
+        std::string artist;
+        std::string length;
+    };
+
+    std::vector<Track> trackList;
     juce::TableListBox tableComponent;
+
+    // Enum for the columns
+    enum ColumnIds {
+        idColumnId = 1,
+        titleColumnId = 2,
+        albumColumnId = 3,
+        artistColumnId = 4,
+        lengthColumnId = 5,
+        actionColumnId = 6
+    };
+
+    // buttons vectors
+    std::vector<juce::TextButton*> editButtons;
+    std::vector<juce::TextButton*> deleteButtons;
 
     int getNumRows() override;
 
@@ -47,8 +69,8 @@ private:
                    int height,
                    bool rowIsSelected) override;
 
-    virtual void cellClicked(int rowNumber, int columnId, const juce::MouseEvent &) override;
-
+//    virtual void cellClicked(int rowNumber, int columnId, const juce::MouseEvent &) override;
+//
     juce::Component *refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected,
                                              juce::Component *existingComponentToUpdate) override;
 

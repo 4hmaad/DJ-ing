@@ -4,6 +4,10 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="HPyjsA" name="Otodecks">
     <GROUP id="{8BD6957D-CC78-561F-B22F-5DC32B7C59A2}" name="Source">
+      <FILE id="ONmodi" name="PlaylistComponent.cpp" compile="1" resource="0"
+            file="Source/PlaylistComponent.cpp"/>
+      <FILE id="b7NKQy" name="PlaylistComponent.h" compile="0" resource="0"
+            file="Source/PlaylistComponent.h"/>
       <FILE id="PCDlZP" name="DeckGUI.cpp" compile="1" resource="0" file="Source/DeckGUI.cpp"/>
       <FILE id="yBrHYn" name="DeckGUI.h" compile="0" resource="0" file="Source/DeckGUI.h"/>
       <FILE id="lQvmm1" name="DJAudioPlayer.cpp" compile="1" resource="0"
