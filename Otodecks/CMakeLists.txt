@@ -37,6 +37,8 @@ jucer_project_settings(
 jucer_project_files("Otodecks/Source"
 # Compile   Xcode     Binary    File
 #           Resource  Resource
+  x         .         .         "Source/PlaylistComponent.cpp"
+  .         .         .         "Source/PlaylistComponent.h"
   x         .         .         "Source/DeckGUI.cpp"
   .         .         .         "Source/DeckGUI.h"
   x         .         .         "Source/DJAudioPlayer.cpp"
@@ -46,9 +48,6 @@ jucer_project_files("Otodecks/Source"
   x         .         .         "Source/Main.cpp"
   .         .         .         "Source/MainComponent.h"
   x         .         .         "Source/MainComponent.cpp"
-  .         .         .         "Source/MainComponent.h"
-  .         .         .         "Source/PlaylistComponent.h"
-  x         .         .         "Source/PlaylistComponent.cpp"
 )
 
 jucer_project_module(
@@ -77,7 +76,7 @@ jucer_project_module(
   PATH "${JUCE_MODULES_GLOBAL_PATH}"
   # JUCE_USE_FLAC
   # JUCE_USE_OGGVORBIS
-  # JUCE_USE_MP3AUDIOFORMAT
+  JUCE_USE_MP3AUDIOFORMAT ON
   # JUCE_USE_LAME_AUDIO_FORMAT
   # JUCE_USE_WINDOWS_MEDIA_FORMAT
 )

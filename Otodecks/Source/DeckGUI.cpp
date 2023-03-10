@@ -28,7 +28,6 @@ DeckGUI::DeckGUI(DJAudioPlayer *_player,
 
     addAndMakeVisible(waveformDisplay);
 
-
     playButton.addListener(this);
     stopButton.addListener(this);
     loadButton.addListener(this);
@@ -43,8 +42,6 @@ DeckGUI::DeckGUI(DJAudioPlayer *_player,
     posSlider.setRange(0.0, 1.0);
 
     startTimer(500);
-
-
 }
 
 DeckGUI::~DeckGUI() {
@@ -56,7 +53,7 @@ void DeckGUI::paint(juce::Graphics &g) {
        draws some placeholder text to get you started.
 
        You should replace everything in this method with your own
-       drawing code..
+       drawing code...
     */
 
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));   // clear the background
@@ -101,18 +98,6 @@ void DeckGUI::buttonClicked(juce::Button *button) {
             waveformDisplay.loadURL(juce::URL{chooser.getResult()});
         });
     }
-    // if (button == &loadButton)
-    // {
-    //     FileChooser chooser{"Select a file..."};
-    //     if (chooser.browseForFileToOpen())
-    //     {
-    //         player->loadURL(URL{chooser.getResult()});
-    //         waveformDisplay.loadURL(URL{chooser.getResult()});
-
-    //     }
-
-
-    // }
 }
 
 void DeckGUI::sliderValueChanged(juce::Slider *slider) {
@@ -127,7 +112,6 @@ void DeckGUI::sliderValueChanged(juce::Slider *slider) {
     if (slider == &posSlider) {
         player->setPositionRelative(slider->getValue());
     }
-
 }
 
 bool DeckGUI::isInterestedInFileDrag(const juce::StringArray &files) {
@@ -142,12 +126,31 @@ void DeckGUI::filesDropped(const juce::StringArray &files, int x, int y) {
     }
 }
 
+bool DeckGUI::isInterestedInDragSource(const juce::DragAndDropTarget::SourceDetails &dragSourceDetails) {
+
+    // make sure it is a track object
+    auto trackObj = dragSourceDetails.description.getDynamicObject();
+    if (trackObj == nullptr) {
+        return false;
+    }
+
+    return true;
+}
+
+void DeckGUI::itemDropped(const juce::DragAndDropTarget::SourceDetails &dragSourceDetails) {
+    std::cout << "DeckGUI::itemDropped" << std::endl;
+
+    auto trackObj = dragSourceDetails.description.getDynamicObject();
+    juce::String trackFileURL = trackObj->getProperty("fileURL");
+
+    player->loadURL(juce::URL{trackFileURL});
+    waveformDisplay.loadURL(juce::URL{trackFileURL});
+}
+
 void DeckGUI::timerCallback() {
-    //std::cout << "DeckGUI::timerCallback" << std::endl;
     waveformDisplay.setPositionRelative(
             player->getPositionRelative());
 }
-
 
     
 

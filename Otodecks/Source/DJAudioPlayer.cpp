@@ -35,8 +35,13 @@ void DJAudioPlayer::releaseResources() {
 }
 
 void DJAudioPlayer::loadURL(juce::URL audioURL) {
-    auto *reader = formatManager.createReaderFor(audioURL.createInputStream(false));
-    if (reader != nullptr) // good file!
+    auto inputStreamOptions = juce::URL::InputStreamOptions(juce::URL::ParameterHandling::inAddress);
+
+    auto *reader = formatManager.createReaderFor(
+            audioURL.createInputStream(inputStreamOptions));
+
+    juce::Logger::writeToLog("DJAudioPlayer::loadURL metadata -> ");
+    if (reader != nullptr)
     {
         std::unique_ptr<juce::AudioFormatReaderSource> newSource(new juce::AudioFormatReaderSource(reader,
                                                                                                    true));

@@ -1,0 +1,3 @@
+/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/build/CMakeFiles/Otodecks.dir
+/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/build/CMakeFiles/edit_cache.dir
+/Users/ahmadnawazkhan/work/study-level5/OOP-final/Otodecks/build/CMakeFiles/rebuild_cache.dir

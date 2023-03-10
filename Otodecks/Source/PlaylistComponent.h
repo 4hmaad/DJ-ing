@@ -1,31 +1,28 @@
-/*
-  ==============================================================================
-
-    PlaylistComponent.h
-    Created: 7 Mar 2023 12:45:53am
-    Author:  Ahmad Nawaz Khan
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "DJAudioPlayer.h"
 
 //==============================================================================
 /*
 */
 class PlaylistComponent : public juce::Component,
                           public juce::TableListBoxModel,
-                          public juce::Button::Listener {
+                          public juce::Button::Listener,
+                          public juce::FileDragAndDropTarget,
+                          public juce::DragAndDropContainer {
 public:
-    PlaylistComponent();
+    PlaylistComponent(DJAudioPlayer *player,
+                      juce::AudioFormatManager &formatManagerToUse);
 
-    ~PlaylistComponent() override;
+    ~PlaylistComponent() override = default;
 
     void paint(juce::Graphics &) override;
 
     void resized() override;
+
+    DJAudioPlayer *player;
+    juce::AudioFormatManager &formatManager;
 
 private:
 
@@ -33,8 +30,8 @@ private:
         std::string id;
         std::string title;
         std::string album;
-        std::string artist;
-        std::string length;
+        float duration;
+        juce::URL fileURL;
     };
 
     std::vector<Track> trackList;
@@ -45,14 +42,9 @@ private:
         idColumnId = 1,
         titleColumnId = 2,
         albumColumnId = 3,
-        artistColumnId = 4,
-        lengthColumnId = 5,
+        durationColumnId = 5,
         actionColumnId = 6
     };
-
-    // buttons vectors
-    std::vector<juce::TextButton*> editButtons;
-    std::vector<juce::TextButton*> deleteButtons;
 
     int getNumRows() override;
 
@@ -70,11 +62,22 @@ private:
                    bool rowIsSelected) override;
 
 //    virtual void cellClicked(int rowNumber, int columnId, const juce::MouseEvent &) override;
-//
     juce::Component *refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected,
                                              juce::Component *existingComponentToUpdate) override;
 
+    juce::var getDragSourceDescription(const juce::SparseSet<int> &currentlySelectedRows) override;
+
     void buttonClicked(juce::Button *button) override;
+
+    bool isInterestedInFileDrag(const juce::StringArray &files) override;
+
+    void filesDropped(const juce::StringArray &files, int x, int y) override;
+
+//    bool isInterestedInDragSource(const juce::DragAndDropTarget::SourceDetails& dragSourceDetails);
+
+    Track loadTrack(const juce::File &file);
+
+    bool trackExists(const juce::File &file);
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlaylistComponent)
 };
