@@ -16,7 +16,7 @@ DeckGUI::DeckGUI(DJAudioPlayer *_player,
                  juce::AudioFormatManager &formatManagerToUse,
                  juce::AudioThumbnailCache &cacheToUse
 ) : player(_player),
-    waveformDisplay(formatManagerToUse, cacheToUse) {
+    waveformDisplay(formatManagerToUse, cacheToUse, _player) {
 
     addAndMakeVisible(playStopButton);
     addAndMakeVisible(loopButton);

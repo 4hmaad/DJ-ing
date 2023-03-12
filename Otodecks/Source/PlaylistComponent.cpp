@@ -21,13 +21,17 @@ PlaylistComponent::PlaylistComponent(DJAudioPlayer *_player,
     searchBox.setTextToShowWhenEmpty("Search", juce::Colours::grey);
     searchBox.setJustification(juce::Justification::verticallyCentred);
 
-    tableComponent.getHeader().addColumn("#", ColumnIds::idColumnId, 15);
-    tableComponent.getHeader().addColumn("TITLE", ColumnIds::titleColumnId, 300);
-    tableComponent.getHeader().addColumn("ALBUM", ColumnIds::albumColumnId, 100);
-    tableComponent.getHeader().addColumn("DURATION", ColumnIds::durationColumnId, 60);
-    tableComponent.getHeader().addColumn("", ColumnIds::actionEditColumnId, 40);
-    tableComponent.getHeader().addColumn("", ColumnIds::actionDeleteColumnId, 40);
+    tableComponent.getHeader().addColumn("#", ColumnIds::idColumnId, 15, 30, -1, juce::TableHeaderComponent::notSortable);
+    tableComponent.getHeader().addColumn("TITLE", ColumnIds::titleColumnId, 250, 30, -1, juce::TableHeaderComponent::notSortable);
+    tableComponent.getHeader().addColumn("ALBUM", ColumnIds::albumColumnId, 80, 30, -1, juce::TableHeaderComponent::notSortable);
+    tableComponent.getHeader().addColumn("DURATION", ColumnIds::durationColumnId, 20, 20, -1, juce::TableHeaderComponent::notSortable);
+    tableComponent.getHeader().addColumn("", ColumnIds::actionEditColumnId, 25, 25, -1, juce::TableHeaderComponent::notSortable);
+    tableComponent.getHeader().addColumn("", ColumnIds::actionDeleteColumnId, 25, 25, -1, juce::TableHeaderComponent::notSortable);
     tableComponent.getHeader().setStretchToFitActive(true);
+
+
+    // disable sorting
+    tableComponent.getHeader().setSortColumnId(-1, false);
 
     tableComponent.setModel(this);
     clearPlaylist.addListener(this);
@@ -60,7 +64,7 @@ void PlaylistComponent::resized() {
     };
 
     playListControlsGrid.performLayout(getLocalBounds().removeFromTop(50));
-    tableComponent.setBounds(0, 50, getWidth(), getHeight());
+    tableComponent.setBounds(0, 50, getWidth(), getHeight() - 50);
 }
 
 int PlaylistComponent::getNumRows() {
@@ -117,8 +121,7 @@ juce::Component *PlaylistComponent::refreshComponentForCell(
 
         editComponent = new juce::TextButton("Edit");
         editComponent->addListener(this);
-        editComponent->setColour(juce::TextButton::buttonColourId, juce::Colours::lightblue);
-        editComponent->setBounds(0, 0, 40, 20);
+        editComponent->setColour(juce::TextButton::buttonColourId, juce::Colours::blue);
 
         auto id{std::to_string(rowNumber)};
         editComponent->setComponentID(id);
@@ -134,7 +137,6 @@ juce::Component *PlaylistComponent::refreshComponentForCell(
         deleteComponent = new juce::TextButton("Delete");
         deleteComponent->addListener(this);
         deleteComponent->setColour(juce::TextButton::buttonColourId, juce::Colours::red);
-        deleteComponent->setBounds(0, 0, 40, 20);
 
         auto id{std::to_string(rowNumber)};
         deleteComponent->setComponentID(id);

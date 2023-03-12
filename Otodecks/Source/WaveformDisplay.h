@@ -11,6 +11,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "DJAudioPlayer.h"
 
 //==============================================================================
 /*
@@ -19,7 +20,7 @@ class WaveformDisplay : public juce::Component,
                         public juce::ChangeListener {
 public:
     WaveformDisplay(juce::AudioFormatManager &formatManagerToUse,
-                    juce::AudioThumbnailCache &cacheToUse);
+                    juce::AudioThumbnailCache &cacheToUse, DJAudioPlayer *_player);
 
     ~WaveformDisplay();
 
@@ -41,6 +42,8 @@ private:
     juce::AudioThumbnail audioThumb;
     bool fileLoaded;
     double position;
+
+    DJAudioPlayer *player;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (WaveformDisplay)
 };

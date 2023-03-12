@@ -13,10 +13,14 @@
 
 //==============================================================================
 WaveformDisplay::WaveformDisplay(juce::AudioFormatManager &formatManagerToUse,
-                                 juce::AudioThumbnailCache &cacheToUse) :
-        audioThumb(1000, formatManagerToUse, cacheToUse),
-        fileLoaded(false),
-        position(0) {
+                                 juce::AudioThumbnailCache &cacheToUse,
+                                 DJAudioPlayer *_player)
+        : player(_player),
+          audioThumb(1000,
+                     formatManagerToUse,
+                     cacheToUse),
+          fileLoaded(false),
+          position(0) {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
 
@@ -41,7 +45,7 @@ void WaveformDisplay::paint(juce::Graphics &g) {
                                1.0f
         );
         g.setColour(juce::Colours::red);
-        g.drawRect(position * getWidth(), 0, 8, getHeight(), 4);
+        g.fillRect(position * getWidth(), 0, 2, getHeight());
     } else {
         g.setColour(juce::Colours::white);
         g.setFont(20.0f);
@@ -78,7 +82,9 @@ void WaveformDisplay::setPositionRelative(double pos) {
 
 void WaveformDisplay::mouseDown(const juce::MouseEvent &event) {
     // Update position based on mouse click position
-    setPositionRelative((double) event.x / getWidth());
+    auto pos = (double) event.x / getWidth();
+    player->setPositionRelative(pos);
+    setPositionRelative(pos);
 }
 
 
