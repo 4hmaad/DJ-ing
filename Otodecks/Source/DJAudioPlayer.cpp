@@ -1,23 +1,10 @@
-/*
-==============================================================================
-
-DJAudioPlayer.cpp
-Created: 13 Mar 2020 4:22:22pm
-Author:  matthew
-
-==============================================================================
-*/
-
 #include "DJAudioPlayer.h"
 
 DJAudioPlayer::DJAudioPlayer(juce::AudioFormatManager &_formatManager)
         : formatManager(_formatManager) {
-
 }
 
-DJAudioPlayer::~DJAudioPlayer() {
-
-}
+DJAudioPlayer::~DJAudioPlayer() {}
 
 void DJAudioPlayer::prepareToPlay(int samplesPerBlockExpected, double sampleRate) {
     transportSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
@@ -26,7 +13,6 @@ void DJAudioPlayer::prepareToPlay(int samplesPerBlockExpected, double sampleRate
 
 void DJAudioPlayer::getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferToFill) {
     resampleSource.getNextAudioBlock(bufferToFill);
-
 }
 
 void DJAudioPlayer::releaseResources() {
@@ -40,7 +26,6 @@ void DJAudioPlayer::loadURL(juce::URL audioURL) {
     auto *reader = formatManager.createReaderFor(
             audioURL.createInputStream(inputStreamOptions));
 
-    juce::Logger::writeToLog("DJAudioPlayer::loadURL metadata -> ");
     if (reader != nullptr)
     {
         std::unique_ptr<juce::AudioFormatReaderSource> newSource(new juce::AudioFormatReaderSource(reader,
@@ -48,6 +33,8 @@ void DJAudioPlayer::loadURL(juce::URL audioURL) {
         transportSource.setSource(newSource.get(), 0, nullptr, reader->sampleRate);
         readerSource.reset(newSource.release());
     }
+
+    start();
 }
 
 void DJAudioPlayer::setGain(double gain) {
@@ -56,7 +43,6 @@ void DJAudioPlayer::setGain(double gain) {
     } else {
         transportSource.setGain(gain);
     }
-
 }
 
 void DJAudioPlayer::setSpeed(double ratio) {
@@ -89,6 +75,20 @@ void DJAudioPlayer::stop() {
     transportSource.stop();
 }
 
+bool DJAudioPlayer::isLooping() {
+}
+
+void DJAudioPlayer::setLooping(bool shouldLoop) {
+}
+
 double DJAudioPlayer::getPositionRelative() {
     return transportSource.getCurrentPosition() / transportSource.getLengthInSeconds();
+}
+
+bool DJAudioPlayer::isPlaying() {
+    return transportSource.isPlaying();
+}
+
+bool DJAudioPlayer::isLoaded() {
+    return transportSource.getLengthInSeconds() > 0;
 }

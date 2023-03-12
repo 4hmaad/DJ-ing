@@ -35,10 +35,15 @@ public:
 
     void setPositionRelative(double pos);
 
-
     void start();
 
     void stop();
+
+    bool isLoaded();
+    bool isPlaying();
+
+    bool isLooping();
+    void setLooping(bool shouldLoop);
 
     /** get the relative position of the playhead */
     double getPositionRelative();

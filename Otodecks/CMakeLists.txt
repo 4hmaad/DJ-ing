@@ -39,6 +39,10 @@ jucer_project_files("Otodecks/Source"
 #           Resource  Resource
   x         .         .         "Source/PlaylistComponent.cpp"
   .         .         .         "Source/PlaylistComponent.h"
+  x         .         .         "Source/Playlist.cpp"
+  .         .         .         "Source/Playlist.h"
+  x         .         .         "Source/EditTrackDialog.cpp"
+  .         .         .         "Source/EditTrackDialog.h"
   x         .         .         "Source/DeckGUI.cpp"
   .         .         .         "Source/DeckGUI.h"
   x         .         .         "Source/DJAudioPlayer.cpp"
@@ -48,6 +52,8 @@ jucer_project_files("Otodecks/Source"
   x         .         .         "Source/Main.cpp"
   .         .         .         "Source/MainComponent.h"
   x         .         .         "Source/MainComponent.cpp"
+  x         .         .         "Source/domain/Track.cpp"
+  .         .         .         "Source/domain/Track.h"
 )
 
 jucer_project_module(

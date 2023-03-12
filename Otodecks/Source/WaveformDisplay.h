@@ -34,6 +34,9 @@ public:
     /** set the relative position of the playhead*/
     void setPositionRelative(double pos);
 
+    /** allows user to update the position of the playhead by clicking on the waveform */
+    void mouseDown(const juce::MouseEvent &event) override;
+
 private:
     juce::AudioThumbnail audioThumb;
     bool fileLoaded;

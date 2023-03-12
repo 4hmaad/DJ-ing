@@ -18,9 +18,8 @@ DeckGUI::DeckGUI(DJAudioPlayer *_player,
 ) : player(_player),
     waveformDisplay(formatManagerToUse, cacheToUse) {
 
-    addAndMakeVisible(playButton);
-    addAndMakeVisible(stopButton);
-    addAndMakeVisible(loadButton);
+    addAndMakeVisible(playStopButton);
+    addAndMakeVisible(loopButton);
 
     addAndMakeVisible(volSlider);
     addAndMakeVisible(speedSlider);
@@ -28,18 +27,21 @@ DeckGUI::DeckGUI(DJAudioPlayer *_player,
 
     addAndMakeVisible(waveformDisplay);
 
-    playButton.addListener(this);
-    stopButton.addListener(this);
-    loadButton.addListener(this);
+    playStopButton.addListener(this);
+    playStopButton.setEnabled(false);
 
     volSlider.addListener(this);
     speedSlider.addListener(this);
     posSlider.addListener(this);
 
+    loopButton.addListener(this);
+    loopButton.setToggleState(true, juce::dontSendNotification);
 
     volSlider.setRange(0.0, 1.0);
     speedSlider.setRange(0.0, 100.0);
     posSlider.setRange(0.0, 1.0);
+
+    volSlider.setValue(0.8);
 
     startTimer(500);
 }
@@ -49,54 +51,40 @@ DeckGUI::~DeckGUI() {
 }
 
 void DeckGUI::paint(juce::Graphics &g) {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code...
-    */
-
-    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));   // clear the background
-
-    g.setColour(juce::Colours::grey);
-    g.drawRect(getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour(juce::Colours::white);
-    g.setFont(14.0f);
-    g.drawText("DeckGUI", getLocalBounds(),
-               juce::Justification::centred, true);   // draw some placeholder text
 }
 
 void DeckGUI::resized() {
-    double rowH = getHeight() / 8;
-    playButton.setBounds(0, 0, getWidth(), rowH);
-    stopButton.setBounds(0, rowH, getWidth(), rowH);
-    volSlider.setBounds(0, rowH * 2, getWidth(), rowH);
-    speedSlider.setBounds(0, rowH * 3, getWidth(), rowH);
-    posSlider.setBounds(0, rowH * 4, getWidth(), rowH);
-    waveformDisplay.setBounds(0, rowH * 5, getWidth(), rowH * 2);
-    loadButton.setBounds(0, rowH * 7, getWidth(), rowH);
+    juce::Grid grid;
+    using Track = juce::Grid::TrackInfo;
 
+    grid.templateRows = {Track(juce::Grid::Fr(1))};
+    grid.autoColumns = Track(juce::Grid::Fr(1));
+    grid.items = {
+            juce::GridItem(playStopButton).withArea(1, 1).withMargin(juce::GridItem::Margin(10)),
+            juce::GridItem(volSlider).withArea(1, 2).withMargin(juce::GridItem::Margin(10)),
+            juce::GridItem(speedSlider).withArea(1, 3).withMargin(juce::GridItem::Margin(10)),
+            juce::GridItem(posSlider).withArea(1, 4).withMargin(juce::GridItem::Margin(10)),
+            juce::GridItem(loopButton).withArea(1, 5).withMargin(juce::GridItem::Margin(10)),
+    };
+
+    grid.performLayout(getLocalBounds().removeFromTop(50));
+    waveformDisplay.setBounds(0, 50, getWidth(), getHeight() - 50);
 }
 
 void DeckGUI::buttonClicked(juce::Button *button) {
-    if (button == &playButton) {
+    if (button == &playStopButton) {
         std::cout << "Play button was clicked " << std::endl;
-        player->start();
-    }
-    if (button == &stopButton) {
-        std::cout << "Stop button was clicked " << std::endl;
-        player->stop();
+        if (player->isPlaying()) {
+            player->stop();
+        } else {
+            player->start();
+        }
 
+        updatePlayStopButton();
     }
-    if (button == &loadButton) {
-        auto fileChooserFlags =
-                juce::FileBrowserComponent::canSelectFiles;
-        fChooser.launchAsync(fileChooserFlags, [this](const juce::FileChooser &chooser) {
-            player->loadURL(juce::URL{chooser.getResult()});
-            // and now the waveformDisplay as well
-            waveformDisplay.loadURL(juce::URL{chooser.getResult()});
-        });
+    if (button == &loopButton) {
+        std::cout << "Loop button was clicked " << std::endl;
+        player->setLooping(loopButton.getToggleState());
     }
 }
 
@@ -122,7 +110,7 @@ bool DeckGUI::isInterestedInFileDrag(const juce::StringArray &files) {
 void DeckGUI::filesDropped(const juce::StringArray &files, int x, int y) {
     std::cout << "DeckGUI::filesDropped" << std::endl;
     if (files.size() == 1) {
-        player->loadURL(juce::URL{juce::File{files[0]}});
+        playTrack(juce::URL{juce::File{files[0]}});
     }
 }
 
@@ -143,8 +131,7 @@ void DeckGUI::itemDropped(const juce::DragAndDropTarget::SourceDetails &dragSour
     auto trackObj = dragSourceDetails.description.getDynamicObject();
     juce::String trackFileURL = trackObj->getProperty("fileURL");
 
-    player->loadURL(juce::URL{trackFileURL});
-    waveformDisplay.loadURL(juce::URL{trackFileURL});
+    playTrack(juce::URL{trackFileURL});
 }
 
 void DeckGUI::timerCallback() {
@@ -152,5 +139,27 @@ void DeckGUI::timerCallback() {
             player->getPositionRelative());
 }
 
-    
+void DeckGUI::playTrack(juce::URL trackURL) {
+    player->loadURL(trackURL);
+    waveformDisplay.loadURL(juce::URL{trackURL});
 
+    updatePlayStopButton();
+}
+
+void DeckGUI::updatePlayStopButton() {
+    // if the player is not loaded, disable the play button and terminate the function
+    if(player->isLoaded() == false) {
+        playStopButton.setEnabled(false);
+        return;
+    }
+
+    // otherwise, enable the play button
+    playStopButton.setEnabled(true);
+
+    // and set the button text to "Play" or "Stop" depending on the player state
+    if (player->isPlaying()) {
+        playStopButton.setButtonText("Stop");
+    } else {
+        playStopButton.setButtonText("Play");
+    }
+}

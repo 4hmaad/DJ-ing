@@ -50,10 +50,10 @@ public:
     void itemDropped(const juce::DragAndDropTarget::SourceDetails &dragSourceDetails) override;
 
 private:
+    // the play/stop button default text is "Play"
+    juce::TextButton playStopButton{"Play"};
 
-    juce::TextButton playButton{"PLAY"};
-    juce::TextButton stopButton{"STOP"};
-    juce::TextButton loadButton{"LOAD"};
+    juce::ToggleButton loopButton{"LOOP"};
 
     juce::Slider volSlider;
     juce::Slider speedSlider;
@@ -61,10 +61,12 @@ private:
 
     juce::FileChooser fChooser{"Select a file..."};
 
-
     WaveformDisplay waveformDisplay;
 
     DJAudioPlayer *player;
+
+    void playTrack(juce::URL trackURL);
+    void updatePlayStopButton();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DeckGUI)
 };

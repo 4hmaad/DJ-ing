@@ -1,5 +1,6 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PlaylistComponent.h"
+#include "EditTrackDialog.h"
 
 //==============================================================================
 PlaylistComponent::PlaylistComponent(DJAudioPlayer *_player,
@@ -8,6 +9,13 @@ PlaylistComponent::PlaylistComponent(DJAudioPlayer *_player,
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
     addAndMakeVisible(tableComponent);
+    addAndMakeVisible(searchBox);
+    addAndMakeVisible(clearPlaylist);
+
+
+    // set up search box
+    searchBox.setTextToShowWhenEmpty("Search", juce::Colours::grey);
+    searchBox.setJustification(juce::Justification::verticallyCentred);
 
     tableComponent.getHeader().addColumn("#", ColumnIds::idColumnId, 15);
     tableComponent.getHeader().addColumn("TITLE", ColumnIds::titleColumnId, 300);
@@ -17,16 +25,33 @@ PlaylistComponent::PlaylistComponent(DJAudioPlayer *_player,
     tableComponent.getHeader().setStretchToFitActive(true);
 
     tableComponent.setModel(this);
+    clearPlaylist.addListener(this);
+    searchBox.addListener(this);
+
+    playlist.load();
 }
 
-void PlaylistComponent::paint(juce::Graphics &g) {}
+PlaylistComponent::~PlaylistComponent() {
+    playlist.save();
+}
+
+void PlaylistComponent::paint(juce::Graphics &g) {
+}
 
 void PlaylistComponent::resized() {
-    tableComponent.setBounds(0, 0, getWidth(), getHeight());
+    juce::Grid playListControlsGrid;
+    playListControlsGrid.autoColumns = juce::Grid::TrackInfo(juce::Grid::Fr(1));
+    playListControlsGrid.templateRows = juce::Grid::TrackInfo(juce::Grid::Fr(1));
+    playListControlsGrid.items = {
+            juce::GridItem(searchBox).withArea(1, 1).withMargin(juce::GridItem::Margin(10)),
+            juce::GridItem(clearPlaylist).withArea(1, 2).withMargin(juce::GridItem::Margin(10))};
+
+    playListControlsGrid.performLayout(getLocalBounds().removeFromTop(50));
+    tableComponent.setBounds(0, 50, getWidth(), getHeight());
 }
 
 int PlaylistComponent::getNumRows() {
-    return (int) trackList.size();
+    return playlist.getTracks().size();
 }
 
 void PlaylistComponent::paintRowBackground(juce::Graphics &g,
@@ -35,9 +60,9 @@ void PlaylistComponent::paintRowBackground(juce::Graphics &g,
                                            int height,
                                            bool rowIsSelected) {
     if (rowIsSelected) {
-        g.fillAll(juce::Colours::orange);
+        g.fillAll(juce::Colour::fromRGB(50, 67, 75));
     } else {
-        g.fillAll(juce::Colours::darkgrey);
+        g.fillAll(juce::Colour::fromRGB(32, 43, 49));
     }
 }
 
@@ -47,22 +72,18 @@ void PlaylistComponent::paintCell(juce::Graphics &g,
                                   int width,
                                   int height,
                                   bool rowIsSelected) {
-    auto trackTitle = trackList.at(rowNumber);
-
-    // converts duration (which is duration in seconds) to the following format: mm:ss
-    int minutes = (int) trackTitle.duration / 60;
-    int seconds = (int) trackTitle.duration / 3600;
-    std::string duration = std::to_string(minutes) + ":" + std::to_string(seconds);
+    auto tracks = playlist.getTracks();
+    auto track = tracks.getUnchecked(rowNumber);
 
     std::map<int, std::string> columnData = {
-            {ColumnIds::idColumnId,       trackTitle.id},
-            {ColumnIds::titleColumnId,    trackTitle.title},
-            {ColumnIds::albumColumnId,    trackTitle.album},
-            {ColumnIds::durationColumnId, duration}
+            {ColumnIds::idColumnId,       std::to_string(rowNumber + 1)},
+            {ColumnIds::titleColumnId,    track.title},
+            {ColumnIds::albumColumnId,    track.album},
+            {ColumnIds::durationColumnId, "02:45"}
     };
     std::string cellColumnContent = columnData[columnId];
 
-    g.setColour(juce::Colours::black);
+    g.setColour(juce::Colours::white);
     g.setFont(14.0f);
     g.drawText(cellColumnContent, 2, 0, width - 4, height, juce::Justification::centredLeft, true);
 }
@@ -87,13 +108,13 @@ juce::Component *PlaylistComponent::refreshComponentForCell(
         auto *editButton = new juce::TextButton("Edit");
         editButton->addListener(this);
         editButton->setColour(juce::TextButton::buttonColourId, juce::Colours::lightblue);
-        editButton->setBounds(0, 0, 40, 20);
+        editButton->setBounds(20, 0, 40, 20);
 
         // create the "Delete" button
         auto *deleteButton = new juce::TextButton("Delete");
         deleteButton->addListener(this);
         deleteButton->setColour(juce::TextButton::buttonColourId, juce::Colours::red);
-        deleteButton->setBounds(40, 0, 40, 20);
+        deleteButton->setBounds(70, 0, 40, 20);
 
         // add the buttons to the action component
         actionComponent->addAndMakeVisible(deleteButton);
@@ -114,30 +135,44 @@ juce::var PlaylistComponent::getDragSourceDescription(const juce::SparseSet<int>
     // the table only allows one row to be selected at a time, so that's why we only get the first element
     auto selectedRow = currentlySelectedRows[0];
     // get the track at the selected row
-    auto track = trackList.at(currentlySelectedRows[0]);
+    auto track = playlist.getTracks().getUnchecked(selectedRow);
     // create a dynamic object to hold the track data to be passed to the target component
-    auto trackDynamicObj = new juce::DynamicObject();
-    trackDynamicObj->setProperty("id", juce::var(track.id));
-    trackDynamicObj->setProperty("title", juce::var(track.title));
-    trackDynamicObj->setProperty("duration", juce::var(track.duration));
-    trackDynamicObj->setProperty("fileURL", juce::var(track.fileURL.toString(true)));
-
-    return trackDynamicObj;
+    return Track::toVar(track);
 }
 
 void PlaylistComponent::buttonClicked(juce::Button *button) {
 
     // check if the button is delete or edit
     if (button->getName() == "Delete") {
-        // delete the track
-        auto id = std::stoi(button->getComponentID().toStdString());
-        trackList.erase(trackList.begin() + id);
-        tableComponent.updateContent();
+
+        // shows juce message box to confirm deletion
+        juce::AlertWindow::showOkCancelBox(
+                juce::AlertWindow::QuestionIcon,
+                "Delete Track",
+                "Are you sure you want to delete this track?",
+                "Yes",
+                "No",
+                nullptr,
+                juce::ModalCallbackFunction::create([this, button](int result) {
+                    if (result == 1) {
+                        auto id = std::stoi(button->getComponentID().toStdString());
+                        playlist.removeTrack(id);
+                        tableComponent.updateContent();
+                    }
+                }));
     } else if (button->getName() == "Edit") {
-        // edit the track
-        auto id = std::stoi(button->getComponentID().toStdString());
-        juce::Logger::writeToLog("Edit button clicked for track with id: " + std::to_string(id));
+        auto trackId = std::stoi(button->getComponentID().toStdString());
+        auto track = playlist.getTracks().getUnchecked(trackId);
+
+        new EditTrackDialog(track.getTitle(), track.getAlbum(), [this, trackId](std::string title, std::string album) {
+            playlist.editTrack(trackId, title, album);
+        });
+
+    } else if (button == &clearPlaylist) {
+        playlist.clear();
     }
+
+    tableComponent.updateContent();
 }
 
 bool PlaylistComponent::isInterestedInFileDrag(const juce::StringArray &files) {
@@ -145,44 +180,12 @@ bool PlaylistComponent::isInterestedInFileDrag(const juce::StringArray &files) {
 }
 
 void PlaylistComponent::filesDropped(const juce::StringArray &trackFiles, int x, int y) {
-    for (const auto &trackFile: trackFiles) {
-        if (trackExists(trackFile)) {
-            DBG("Track already exists in playlist");
-            continue;
-        }
-        trackList.push_back(loadTrack(trackFile));
-    }
-
+    playlist.addTracks(trackFiles);
     tableComponent.updateContent();
 }
 
-// This method loads a track from a file
-PlaylistComponent::Track PlaylistComponent::loadTrack(const juce::File &trackFile) {
-    // create a new track
-    Track track;
-    track.id = std::to_string(trackList.size() + 1);
-    track.title = trackFile.getFileNameWithoutExtension().toStdString();
-    track.album = "Album";
-    track.fileURL = juce::URL{trackFile};
-
-    // get the track's duration
-    std::unique_ptr<juce::AudioFormatReader> reader(formatManager.createReaderFor(trackFile));
-    if (reader != nullptr) {
-        const double durationInSeconds = reader->lengthInSamples / reader->sampleRate;
-        track.duration = durationInSeconds;
-    }
-
-    return track;
-}
-
-// This method checks if a track with the same file URL already exists in the playlist
-bool PlaylistComponent::trackExists(const juce::File &file) {
-    for (const auto &track: trackList) {
-        if (track.fileURL == juce::URL{file}) {
-            return true;
-        }
-    }
-
-    return false;
+void PlaylistComponent::textEditorTextChanged(juce::TextEditor &editor) {
+    playlist.setSearchQuery(editor.getText().toStdString());
+    tableComponent.updateContent();
 }
 

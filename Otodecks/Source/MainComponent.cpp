@@ -12,7 +12,7 @@
 MainComponent::MainComponent() {
     // Make sure you set the size of the component after
     // you add any child components.
-    setSize(800, 600);
+    setSize(1000, 700);
 
     // Some platforms require permissions to open input channels so request that here
     if (juce::RuntimePermissions::isRequired(juce::RuntimePermissions::recordAudio)
@@ -64,15 +64,20 @@ void MainComponent::releaseResources() {
 
 //==============================================================================
 void MainComponent::paint(juce::Graphics &g) {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-
-    // You can add your drawing code here!
+    g.fillAll(juce::Colour::fromRGB(18, 18, 18));
 }
 
 void MainComponent::resized() {
-    deckGUI1.setBounds(0, 0, getWidth()/2, getHeight() / 2);
-    deckGUI2.setBounds(getWidth()/2, 0, getWidth()/2, getHeight() / 2);
-    playlistComponent.setBounds(0, getHeight()/2, getWidth(), getHeight()/2);
-}
+    juce::Grid grid;
+    using Track = juce::Grid::TrackInfo;
+    using Fr = juce::Grid::Fr;
 
+    grid.templateColumns = {Track(Fr(1))};
+    grid.templateRows = {Track(Fr(1)), Track(Fr(1)), Track(Fr(2))};
+
+    grid.items.add(juce::GridItem(&deckGUI1).withArea(juce::GridItem::Span(1), 1));
+    grid.items.add(juce::GridItem(&deckGUI2).withArea(juce::GridItem::Span(1), 1));
+    grid.items.add(juce::GridItem(&playlistComponent).withArea(juce::GridItem::Span(1), 1));
+
+    grid.performLayout(getLocalBounds());
+}
