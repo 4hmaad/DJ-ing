@@ -31,5 +31,8 @@ EditTrackDialog::EditTrackDialog(const std::string &title, const std::string &al
         std::string titleValue = asyncAlertWindow->getTextEditor("title")->getText().toStdString();
         std::string albumValue = asyncAlertWindow->getTextEditor("album")->getText().toStdString();
         callback(titleValue, albumValue);
+
+        // delete the alert window after the callback is executed
+        asyncAlertWindow = nullptr;
     }));
 }

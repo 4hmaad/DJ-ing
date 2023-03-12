@@ -14,10 +14,11 @@ void Playlist::addTracks(const juce::StringArray &trackFiles) {
 
 void Playlist::addTrack(const juce::File &file) {
     Track addedTrack = Track::parseFrom(file);
-    //  check if track already exists, then just update it
+    //  check if track already exists, then don't add it
     for (auto &track: tracks) {
-        if (track.getFileURL() == addedTrack.getFileURL()) {
-            editTrack(addedTrack);
+        DBG("Comparing " << track.getFileURLStr() << " with " << addedTrack.getFileURLStr() << " equals: " << std::to_string(track.getFileURLStr() == addedTrack.getFileURLStr()));
+        if (track.getFileURLStr() == addedTrack.getFileURLStr()) {
+            DBG("Track already exists");
             return;
         }
     }
@@ -28,15 +29,6 @@ void Playlist::addTrack(const juce::File &file) {
 
 void Playlist::removeTrack(int index) {
     tracks.remove(index);
-}
-
-void Playlist::editTrack(Track updatedTrack) {
-    for (auto &track: tracks) {
-        if (track.getFileURL() == updatedTrack.getFileURL()) {
-            track = updatedTrack;
-            return;
-        }
-    }
 }
 
 void Playlist::editTrack(int index, std::string title, std::string album) {

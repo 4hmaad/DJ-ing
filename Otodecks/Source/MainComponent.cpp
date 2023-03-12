@@ -53,10 +53,6 @@ void MainComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo &buffer
 }
 
 void MainComponent::releaseResources() {
-    // This will be called when the audio device stops, or when it is being
-    // restarted due to a setting change.
-
-    // For more details, see the help for AudioProcessor::releaseResources()
     player1.releaseResources();
     player2.releaseResources();
     mixerSource.releaseResources();

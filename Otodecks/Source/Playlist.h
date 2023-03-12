@@ -17,7 +17,6 @@ public:
 
     void removeTrack(int index);
 
-    void editTrack(Track updatedTrack);
     void editTrack(int index, std::string title, std::string album);
 
     void setSearchQuery(std::string query);
@@ -35,5 +34,6 @@ private:
     std::string searchQuery;
 
     // Constants
-    juce::File playlistFile = juce::File::getSpecialLocation(juce::File::userDocumentsDirectory).getChildFile("Otodecks/data/playlist.json");
+    juce::File playlistFile = juce::File::getSpecialLocation(juce::File::userDocumentsDirectory).getChildFile(
+            "Otodecks/data/playlist.json");
 };

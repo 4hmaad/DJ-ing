@@ -48,6 +48,10 @@ juce::URL Track::getFileURL() {
     return fileURL;
 }
 
+std::string Track::getFileURLStr() {
+    return fileURL.toString(true).toStdString();
+}
+
 Track Track::parseFrom(const juce::File &file) {
 
     juce::AudioFormatManager formatManager;
@@ -82,7 +86,7 @@ juce::var Track::toVar(Track track) {
     trackVar->setProperty("title", juce::var(track.getTitle()));
     trackVar->setProperty("album", juce::var(track.getAlbum()));
     trackVar->setProperty("duration", juce::var(track.getDuration()));
-    trackVar->setProperty("fileURL", juce::var(track.getFileURL().toString(true)));
+    trackVar->setProperty("fileURL", juce::var(track.getFileURLStr()));
 
     return trackVar;
 }

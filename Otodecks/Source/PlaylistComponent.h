@@ -32,6 +32,7 @@ private:
     juce::TextEditor searchBox;
     juce::TableListBox tableComponent;
     juce::TextButton clearPlaylist{"Clear"};
+    juce::TextButton addTrack{"Add Tracks"};
 
     // Listeners for UI elements
     void buttonClicked(juce::Button *button) override;
@@ -71,10 +72,12 @@ private:
         titleColumnId = 2,
         albumColumnId = 3,
         durationColumnId = 5,
-        actionColumnId = 6
+        actionEditColumnId = 6,
+        actionDeleteColumnId = 7
     };
 
     Playlist playlist;
+    juce::FileChooser chooser{"Select tracks to add to the playlist...", juce::File::getSpecialLocation(juce::File::userMusicDirectory), "*", false};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlaylistComponent)
 };

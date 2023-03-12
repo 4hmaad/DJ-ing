@@ -18,18 +18,21 @@ public:
     Track(std::string title, std::string album, float duration, juce::URL fileURL);
 
     std::string getTitle();
+
     std::string setTitle(const std::string title);
 
     std::string getAlbum();
+
     std::string setAlbum(const std::string album);
 
     float getDuration();
 
     juce::URL getFileURL();
+    std::string getFileURLStr();
 
     static Track parseFrom(const juce::File &file);
+
     static Track parseFrom(const juce::var &trackVar);
 
     static juce::var toVar(Track track);
-
 };

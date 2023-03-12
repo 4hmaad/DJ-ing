@@ -6,11 +6,15 @@
 PlaylistComponent::PlaylistComponent(DJAudioPlayer *_player,
                                      juce::AudioFormatManager &formatManagerToUse) : player(_player),
                                                                                      formatManager(formatManagerToUse) {
+
+    getLookAndFeel().setUsingNativeAlertWindows(false);
+
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
     addAndMakeVisible(tableComponent);
     addAndMakeVisible(searchBox);
     addAndMakeVisible(clearPlaylist);
+    addAndMakeVisible(addTrack);
 
 
     // set up search box
@@ -21,21 +25,28 @@ PlaylistComponent::PlaylistComponent(DJAudioPlayer *_player,
     tableComponent.getHeader().addColumn("TITLE", ColumnIds::titleColumnId, 300);
     tableComponent.getHeader().addColumn("ALBUM", ColumnIds::albumColumnId, 100);
     tableComponent.getHeader().addColumn("DURATION", ColumnIds::durationColumnId, 60);
-    tableComponent.getHeader().addColumn("", ColumnIds::actionColumnId, 100);
+    tableComponent.getHeader().addColumn("", ColumnIds::actionEditColumnId, 40);
+    tableComponent.getHeader().addColumn("", ColumnIds::actionDeleteColumnId, 40);
     tableComponent.getHeader().setStretchToFitActive(true);
 
     tableComponent.setModel(this);
     clearPlaylist.addListener(this);
     searchBox.addListener(this);
+    addTrack.addListener(this);
 
     playlist.load();
 }
 
 PlaylistComponent::~PlaylistComponent() {
     playlist.save();
+
 }
 
 void PlaylistComponent::paint(juce::Graphics &g) {
+    // loop through all tracks and log the fileURL
+    for (auto &track : playlist.getTracks()) {
+        DBG(track.getFileURLStr());
+    }
 }
 
 void PlaylistComponent::resized() {
@@ -44,7 +55,9 @@ void PlaylistComponent::resized() {
     playListControlsGrid.templateRows = juce::Grid::TrackInfo(juce::Grid::Fr(1));
     playListControlsGrid.items = {
             juce::GridItem(searchBox).withArea(1, 1).withMargin(juce::GridItem::Margin(10)),
-            juce::GridItem(clearPlaylist).withArea(1, 2).withMargin(juce::GridItem::Margin(10))};
+            juce::GridItem(addTrack).withArea(1, 2).withMargin(juce::GridItem::Margin(10)),
+            juce::GridItem(clearPlaylist).withArea(1, 3).withMargin(juce::GridItem::Margin(10))
+    };
 
     playListControlsGrid.performLayout(getLocalBounds().removeFromTop(50));
     tableComponent.setBounds(0, 50, getWidth(), getHeight());
@@ -95,36 +108,38 @@ juce::Component *PlaylistComponent::refreshComponentForCell(
         Component *existingComponentToUpdate) {
 
     // if the column is the action column, create and return the action component
-    if (columnId == ColumnIds::actionColumnId) {
-        auto *actionComponent = dynamic_cast<juce::Component *>(existingComponentToUpdate);
+    if (columnId == ColumnIds::actionEditColumnId) {
+        auto *editComponent = dynamic_cast<juce::TextButton *>(existingComponentToUpdate);
         // create actionComponent if it does not exist
-        if (actionComponent != nullptr) {
-            return actionComponent;
+        if (editComponent != nullptr) {
+            return editComponent;
         }
 
-        actionComponent = new juce::Component();
-
-        // create the "Edit" button
-        auto *editButton = new juce::TextButton("Edit");
-        editButton->addListener(this);
-        editButton->setColour(juce::TextButton::buttonColourId, juce::Colours::lightblue);
-        editButton->setBounds(20, 0, 40, 20);
-
-        // create the "Delete" button
-        auto *deleteButton = new juce::TextButton("Delete");
-        deleteButton->addListener(this);
-        deleteButton->setColour(juce::TextButton::buttonColourId, juce::Colours::red);
-        deleteButton->setBounds(70, 0, 40, 20);
-
-        // add the buttons to the action component
-        actionComponent->addAndMakeVisible(deleteButton);
-        actionComponent->addAndMakeVisible(editButton);
+        editComponent = new juce::TextButton("Edit");
+        editComponent->addListener(this);
+        editComponent->setColour(juce::TextButton::buttonColourId, juce::Colours::lightblue);
+        editComponent->setBounds(0, 0, 40, 20);
 
         auto id{std::to_string(rowNumber)};
-        editButton->setComponentID(id);
-        deleteButton->setComponentID(id);
+        editComponent->setComponentID(id);
 
-        return actionComponent;
+        existingComponentToUpdate = editComponent;
+    } else if (columnId == ColumnIds::actionDeleteColumnId) {
+        auto *deleteComponent = dynamic_cast<juce::TextButton *>(existingComponentToUpdate);
+        // create actionComponent if it does not exist
+        if (deleteComponent != nullptr) {
+            return deleteComponent;
+        }
+
+        deleteComponent = new juce::TextButton("Delete");
+        deleteComponent->addListener(this);
+        deleteComponent->setColour(juce::TextButton::buttonColourId, juce::Colours::red);
+        deleteComponent->setBounds(0, 0, 40, 20);
+
+        auto id{std::to_string(rowNumber)};
+        deleteComponent->setComponentID(id);
+
+        existingComponentToUpdate = deleteComponent;
     }
 
     return existingComponentToUpdate;
@@ -141,35 +156,47 @@ juce::var PlaylistComponent::getDragSourceDescription(const juce::SparseSet<int>
 }
 
 void PlaylistComponent::buttonClicked(juce::Button *button) {
+    // get the track id from the button's component id
 
-    // check if the button is delete or edit
     if (button->getName() == "Delete") {
-
-        // shows juce message box to confirm deletion
-        juce::AlertWindow::showOkCancelBox(
-                juce::AlertWindow::QuestionIcon,
-                "Delete Track",
-                "Are you sure you want to delete this track?",
-                "Yes",
-                "No",
-                nullptr,
-                juce::ModalCallbackFunction::create([this, button](int result) {
-                    if (result == 1) {
-                        auto id = std::stoi(button->getComponentID().toStdString());
-                        playlist.removeTrack(id);
-                        tableComponent.updateContent();
-                    }
-                }));
+        auto trackId = std::stoi(button->getComponentID().toStdString());
+        playlist.removeTrack(trackId);
     } else if (button->getName() == "Edit") {
         auto trackId = std::stoi(button->getComponentID().toStdString());
         auto track = playlist.getTracks().getUnchecked(trackId);
-
         new EditTrackDialog(track.getTitle(), track.getAlbum(), [this, trackId](std::string title, std::string album) {
             playlist.editTrack(trackId, title, album);
         });
-
     } else if (button == &clearPlaylist) {
-        playlist.clear();
+        // show message box to confirm clearing of playlist
+        juce::AlertWindow::showOkCancelBox(
+                juce::AlertWindow::QuestionIcon,
+                "Clear Playlist",
+                "Are you sure you want to clear the playlist?",
+                "Yes",
+                "No",
+                nullptr,
+                juce::ModalCallbackFunction::create([this](int result) {
+                    if (result == 1) {
+                        playlist.clear();
+                        tableComponent.updateContent();
+                    }
+                }));
+    } else if (button == &addTrack) {
+        chooser.launchAsync(
+                juce::FileBrowserComponent::openMode | juce::FileBrowserComponent::canSelectFiles |
+                juce::FileBrowserComponent::canSelectMultipleItems,
+                [this](const juce::FileChooser &chooser) {
+                    auto results = chooser.getResults();
+                    if(results.isEmpty()) return;
+
+                    juce::StringArray trackFiles;
+                    for (auto &result : results) {
+                        trackFiles.add(result.getFullPathName());
+                    }
+                    playlist.addTracks(trackFiles);
+                    tableComponent.updateContent();
+                });
     }
 
     tableComponent.updateContent();
