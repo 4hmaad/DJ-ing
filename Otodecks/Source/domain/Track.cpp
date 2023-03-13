@@ -59,7 +59,7 @@ Track Track::parseFrom(const juce::File &file) {
     std::string title = file.getFileNameWithoutExtension().toStdString();
     std::string album = "Unknown";
     juce::URL fileURL = juce::URL{file};
-    float duration;
+    float duration = 0.0f;
 
     // get the track's duration
     std::unique_ptr<juce::AudioFormatReader> reader(formatManager.createReaderFor(file));
@@ -70,6 +70,18 @@ Track Track::parseFrom(const juce::File &file) {
         for (auto &key : metadata.getAllKeys()) {
             DBG("Metadata: " << key.toStdString() << " = " << metadata[key].toStdString());
         }
+
+        // get album if it exists in the metadata
+        if (metadata.getAllKeys().contains(juce::WavAudioFormat::riffInfoProductName)) {
+            album = metadata[juce::WavAudioFormat::riffInfoProductName].toStdString();
+        }
+        else if (metadata.getAllKeys().contains("Album")) {
+            album = metadata["Album"].toStdString();
+        }
+        else if (metadata.getAllKeys().contains(juce::OggVorbisAudioFormat::id3album)) {
+            album = metadata[juce::OggVorbisAudioFormat::id3album].toStdString();
+        }
+
 
         const double durationInSeconds = reader->lengthInSamples / reader->sampleRate;
         duration = durationInSeconds;

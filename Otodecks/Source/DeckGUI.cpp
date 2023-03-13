@@ -57,6 +57,13 @@ DeckGUI::~DeckGUI() {
 }
 
 void DeckGUI::paint(juce::Graphics &g) {
+    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
+
+    g.setColour(juce::Colours::darkgoldenrod);
+    g.drawRect(getLocalBounds().removeFromTop(50), 2);
+
+    g.setColour(juce::Colours::white);
+    g.setFont(14.0f);
 }
 
 void DeckGUI::resized() {

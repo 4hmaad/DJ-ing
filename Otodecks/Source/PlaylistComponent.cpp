@@ -16,28 +16,23 @@ PlaylistComponent::PlaylistComponent(DJAudioPlayer *_player,
     addAndMakeVisible(clearPlaylist);
     addAndMakeVisible(addTrack);
 
-
     // set up search box
     searchBox.setTextToShowWhenEmpty("Search", juce::Colours::grey);
     searchBox.setJustification(juce::Justification::verticallyCentred);
 
-    tableComponent.getHeader().addColumn("#", ColumnIds::idColumnId, 15, 30, -1,
+    tableComponent.getHeader().addColumn("#", ColumnIds::idColumnId, 30, 30, 30,
                                          juce::TableHeaderComponent::notSortable);
-    tableComponent.getHeader().addColumn("TITLE", ColumnIds::titleColumnId, 250, 30, -1,
+    tableComponent.getHeader().addColumn("TITLE", ColumnIds::titleColumnId, 400, 100, -1,
                                          juce::TableHeaderComponent::notSortable);
-    tableComponent.getHeader().addColumn("ALBUM", ColumnIds::albumColumnId, 80, 30, -1,
+    tableComponent.getHeader().addColumn("ALBUM", ColumnIds::albumColumnId, 150, 30, -1,
                                          juce::TableHeaderComponent::notSortable);
-    tableComponent.getHeader().addColumn("DURATION", ColumnIds::durationColumnId, 20, 20, -1,
+    tableComponent.getHeader().addColumn("DURATION", ColumnIds::durationColumnId, 100, 20, 100,
                                          juce::TableHeaderComponent::notSortable);
-    tableComponent.getHeader().addColumn("", ColumnIds::actionEditColumnId, 25, 25, -1,
+    tableComponent.getHeader().addColumn("", ColumnIds::actionEditColumnId, 150, 40, 150,
                                          juce::TableHeaderComponent::notSortable);
-    tableComponent.getHeader().addColumn("", ColumnIds::actionDeleteColumnId, 25, 25, -1,
+    tableComponent.getHeader().addColumn("", ColumnIds::actionDeleteColumnId, 150, 40, 150,
                                          juce::TableHeaderComponent::notSortable);
-    tableComponent.getHeader().setStretchToFitActive(true);
 
-
-    // disable sorting
-    tableComponent.getHeader().setSortColumnId(-1, false);
 
     tableComponent.setModel(this);
     clearPlaylist.addListener(this);
@@ -53,6 +48,8 @@ PlaylistComponent::~PlaylistComponent() {
 }
 
 void PlaylistComponent::paint(juce::Graphics &g) {
+    g.setColour(juce::Colours::darkgoldenrod);
+    g.drawRect(getLocalBounds().removeFromTop(50), 2);
 }
 
 void PlaylistComponent::resized() {
@@ -67,6 +64,8 @@ void PlaylistComponent::resized() {
 
     playListControlsGrid.performLayout(getLocalBounds().removeFromTop(50));
     tableComponent.setBounds(0, 50, getWidth(), getHeight() - 50);
+
+    tableComponent.getHeader().setStretchToFitActive(true);
 }
 
 int PlaylistComponent::getNumRows() {
@@ -123,7 +122,6 @@ juce::Component *PlaylistComponent::refreshComponentForCell(
 
         editComponent = new juce::TextButton("Edit");
         editComponent->addListener(this);
-        editComponent->setColour(juce::TextButton::buttonColourId, juce::Colours::blue);
 
         auto id{std::to_string(rowNumber)};
         editComponent->setComponentID(id);
@@ -168,8 +166,10 @@ void PlaylistComponent::buttonClicked(juce::Button *button) {
     } else if (button->getName() == "Edit") {
         auto trackId = std::stoi(button->getComponentID().toStdString());
         auto track = playlist.getTracks().getUnchecked(trackId);
+
         new EditTrackDialog(track.getTitle(), track.getAlbum(), [this, trackId](std::string title, std::string album) {
-            playlist.editTrack(trackId, title, album);
+            std::string trackFileURL = playlist.getTracks().getUnchecked(trackId).getFileURLStr();
+            playlist.editTrack(trackFileURL, title, album);
         });
     } else if (button == &clearPlaylist) {
         // show message box to confirm clearing of playlist

@@ -30,11 +30,14 @@ void Playlist::removeTrack(int index) {
     tracks.remove(index);
 }
 
-void Playlist::editTrack(int index, std::string title, std::string album) {
-    Track track = tracks.getReference(index);
-    track.setTitle(title);
-    track.setAlbum(album);
-    tracks.set(index, track);
+void Playlist::editTrack(std::string fileURLOfTrackToEdit, std::string title, std::string album) {
+    for (auto &track: tracks) {
+        if (track.getFileURLStr() == fileURLOfTrackToEdit) {
+            track.setTitle(title);
+            track.setAlbum(album);
+            return;
+        }
+    }
 }
 
 void Playlist::setSearchQuery(std::string query) {
