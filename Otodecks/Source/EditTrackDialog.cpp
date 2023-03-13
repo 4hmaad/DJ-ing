@@ -1,6 +1,6 @@
 
-#include "../JuceLibraryCode/JuceHeader.h"
 #include "EditTrackDialog.h"
+#include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
 EditTrackDialog::EditTrackDialog(const std::string &title, const std::string &album,

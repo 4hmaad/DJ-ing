@@ -34,3 +34,13 @@
 25	1843	1678694104636278875	CMakeFiles/Otodecks.dir/Source/DeckGUI.cpp.o	8f0a65a609b8037a
 25	1860	1678694104655854836	CMakeFiles/Otodecks.dir/Source/MainComponent.cpp.o	552e8f574d774697
 1860	3488	1678694106288052566	Otodecks.app/Contents/MacOS/Otodecks	57d7bf22002f4c6d
+23	2661	1678695070624473219	CMakeFiles/Otodecks.dir/Source/DJAudioPlayer.cpp.o	977d2c14a7eefe92
+23	2682	1678695070637870702	CMakeFiles/Otodecks.dir/Source/Playlist.cpp.o	ec9568551086370a
+23	2791	1678695070747610591	CMakeFiles/Otodecks.dir/Source/EditTrackDialog.cpp.o	45bbcf13a5c91b5f
+23	2954	1678695070916614975	CMakeFiles/Otodecks.dir/Source/DeckGUI.cpp.o	8f0a65a609b8037a
+23	3039	1678695071002628975	CMakeFiles/Otodecks.dir/Source/WaveformDisplay.cpp.o	5bcfdd39b6d627e2
+22	3258	1678695071215520681	CMakeFiles/Otodecks.dir/Source/PlaylistComponent.cpp.o	e6a38a48e7b02235
+2661	4748	1678695072713750710	CMakeFiles/Otodecks.dir/Source/Main.cpp.o	d3e1eba53b6eb686
+2791	4756	1678695072723673445	CMakeFiles/Otodecks.dir/Source/domain/Track.cpp.o	9dd718e6ea4fac64
+2682	4872	1678695072838308806	CMakeFiles/Otodecks.dir/Source/MainComponent.cpp.o	552e8f574d774697
+4872	6637	1678695074605161576	Otodecks.app/Contents/MacOS/Otodecks	57d7bf22002f4c6d
