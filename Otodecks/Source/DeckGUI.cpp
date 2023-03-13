@@ -20,28 +20,34 @@ DeckGUI::DeckGUI(DJAudioPlayer *_player,
 
     addAndMakeVisible(playStopButton);
     addAndMakeVisible(loopButton);
-
     addAndMakeVisible(volSlider);
     addAndMakeVisible(speedSlider);
-    addAndMakeVisible(posSlider);
-
     addAndMakeVisible(waveformDisplay);
+    addAndMakeVisible(volSliderLabel);
+    addAndMakeVisible(speedSliderLabel);
 
     playStopButton.addListener(this);
     playStopButton.setEnabled(false);
 
     volSlider.addListener(this);
     speedSlider.addListener(this);
-    posSlider.addListener(this);
 
+    // by default, the loop button is off
     loopButton.addListener(this);
-    loopButton.setToggleState(true, juce::dontSendNotification);
+    loopButton.setToggleState(false, juce::dontSendNotification);
 
     volSlider.setRange(0.0, 1.0);
-    speedSlider.setRange(0.0, 100.0);
-    posSlider.setRange(0.0, 1.0);
+    speedSlider.setRange(1, 200.0, 1.0);
 
     volSlider.setValue(0.8);
+    volSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 50, 20);
+
+    speedSlider.setValue(100.0);
+    speedSlider.setTextBoxStyle(juce::Slider::TextBoxLeft, false, 50, 20);
+
+
+    speedSliderLabel.setText("Speed:", juce::dontSendNotification);
+    volSliderLabel.setText("Volume:", juce::dontSendNotification);
 
     startTimer(500);
 }
@@ -58,13 +64,19 @@ void DeckGUI::resized() {
     using Track = juce::Grid::TrackInfo;
 
     grid.templateRows = {Track(juce::Grid::Fr(1))};
-    grid.autoColumns = Track(juce::Grid::Fr(1));
+    grid.templateColumns = { Track(juce::Grid::Fr(3)),
+                             Track(juce::Grid::Fr(1)),
+                             Track(juce::Grid::Fr(3)),
+                             Track(juce::Grid::Fr(1)),
+                             Track(juce::Grid::Fr(3)),
+                             Track(juce::Grid::Fr(1))};
     grid.items = {
             juce::GridItem(playStopButton).withArea(1, 1).withMargin(juce::GridItem::Margin(10)),
-            juce::GridItem(volSlider).withArea(1, 2).withMargin(juce::GridItem::Margin(10)),
-            juce::GridItem(speedSlider).withArea(1, 3).withMargin(juce::GridItem::Margin(10)),
-            juce::GridItem(posSlider).withArea(1, 4).withMargin(juce::GridItem::Margin(10)),
-            juce::GridItem(loopButton).withArea(1, 5).withMargin(juce::GridItem::Margin(10)),
+            juce::GridItem(volSliderLabel).withArea(1, 2).withMargin(juce::GridItem::Margin(10)),
+            juce::GridItem(volSlider).withArea(1, 3).withMargin(juce::GridItem::Margin(10)),
+            juce::GridItem(speedSliderLabel).withArea(1, 4).withMargin(juce::GridItem::Margin(10)),
+            juce::GridItem(speedSlider).withArea(1, 5).withMargin(juce::GridItem::Margin(10)),
+            juce::GridItem(loopButton).withArea(1, 6).withMargin(juce::GridItem::Margin(10)),
     };
 
     grid.performLayout(getLocalBounds().removeFromTop(50));
@@ -85,6 +97,7 @@ void DeckGUI::buttonClicked(juce::Button *button) {
     if (button == &loopButton) {
         std::cout << "Loop button was clicked " << std::endl;
         player->setLooping(loopButton.getToggleState());
+        player->start();
     }
 }
 
@@ -92,13 +105,8 @@ void DeckGUI::sliderValueChanged(juce::Slider *slider) {
     if (slider == &volSlider) {
         player->setGain(slider->getValue());
     }
-
     if (slider == &speedSlider) {
-        player->setSpeed(slider->getValue());
-    }
-
-    if (slider == &posSlider) {
-        player->setPositionRelative(slider->getValue());
+        player->setSpeed(slider->getValue() / 100);
     }
 }
 
@@ -137,6 +145,12 @@ void DeckGUI::itemDropped(const juce::DragAndDropTarget::SourceDetails &dragSour
 void DeckGUI::timerCallback() {
     waveformDisplay.setPositionRelative(
             player->getPositionRelative());
+
+    // reset player when the track is finished
+    if (player->isFinished()) {
+        player->setPositionRelative(0.0);
+        updatePlayStopButton();
+    }
 }
 
 void DeckGUI::playTrack(juce::URL trackURL) {
@@ -148,13 +162,15 @@ void DeckGUI::playTrack(juce::URL trackURL) {
 
 void DeckGUI::updatePlayStopButton() {
     // if the player is not loaded, disable the play button and terminate the function
-    if(player->isLoaded() == false) {
+    if (player->isLoaded() == false) {
         playStopButton.setEnabled(false);
+        loopButton.setEnabled(false);
         return;
     }
 
     // otherwise, enable the play button
     playStopButton.setEnabled(true);
+    loopButton.setEnabled(true);
 
     // and set the button text to "Play" or "Stop" depending on the player state
     if (player->isPlaying()) {

@@ -16,7 +16,6 @@ void Playlist::addTrack(const juce::File &file) {
     Track addedTrack = Track::parseFrom(file);
     //  check if track already exists, then don't add it
     for (auto &track: tracks) {
-        DBG("Comparing " << track.getFileURLStr() << " with " << addedTrack.getFileURLStr() << " equals: " << std::to_string(track.getFileURLStr() == addedTrack.getFileURLStr()));
         if (track.getFileURLStr() == addedTrack.getFileURLStr()) {
             DBG("Track already exists");
             return;

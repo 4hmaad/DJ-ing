@@ -27,6 +27,8 @@ public:
 
     float getDuration();
 
+    std::string getParsedDuration();
+
     juce::URL getFileURL();
     std::string getFileURLStr();
 

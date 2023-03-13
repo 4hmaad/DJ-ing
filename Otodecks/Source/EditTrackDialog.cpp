@@ -1,12 +1,3 @@
-/*
-  ==============================================================================
-
-    EditTrackDialog.cpp
-    Created: 12 Mar 2023 11:52:15pm
-    Author:  Ahmad Nawaz Khan
-
-  ==============================================================================
-*/
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "EditTrackDialog.h"

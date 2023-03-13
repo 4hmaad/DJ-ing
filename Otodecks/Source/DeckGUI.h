@@ -1,12 +1,4 @@
-/*
-  ==============================================================================
 
-    DeckGUI.h
-    Created: 13 Mar 2020 6:44:48pm
-    Author:  matthew
-
-  ==============================================================================
-*/
 
 #pragma once
 
@@ -47,6 +39,7 @@ public:
     void timerCallback() override;
 
     bool isInterestedInDragSource(const juce::DragAndDropTarget::SourceDetails &dragSourceDetails) override;
+
     void itemDropped(const juce::DragAndDropTarget::SourceDetails &dragSourceDetails) override;
 
 private:
@@ -57,15 +50,16 @@ private:
 
     juce::Slider volSlider;
     juce::Slider speedSlider;
-    juce::Slider posSlider;
 
-    juce::FileChooser fChooser{"Select a file..."};
+    juce::Label volSliderLabel;
+    juce::Label speedSliderLabel;
 
     WaveformDisplay waveformDisplay;
 
     DJAudioPlayer *player;
 
     void playTrack(juce::URL trackURL);
+
     void updatePlayStopButton();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DeckGUI)

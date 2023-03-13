@@ -59,7 +59,6 @@ void MainComponent::releaseResources() {
 
 //==============================================================================
 void MainComponent::paint(juce::Graphics &g) {
-    g.fillAll(juce::Colour::fromRGB(18, 18, 18));
 }
 
 void MainComponent::resized() {

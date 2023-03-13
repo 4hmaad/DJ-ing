@@ -1,12 +1,3 @@
-/*
-  ==============================================================================
-
-    Track.cpp
-    Created: 12 Mar 2023 6:37:48pm
-    Author:  Ahmad Nawaz Khan
-
-  ==============================================================================
-*/
 
 #include "Track.h"
 
@@ -44,6 +35,14 @@ float Track::getDuration() {
     return duration;
 }
 
+std::string Track::getParsedDuration() {
+    int minutes;
+    minutes = (int) duration / 60;
+    int seconds = (int) duration % 60;
+    std::string parsedDuration = std::to_string(minutes) + ":" + (seconds < 10 ? "0" : "") + std::to_string(seconds);
+    return parsedDuration;
+}
+
 juce::URL Track::getFileURL() {
     return fileURL;
 }
@@ -65,6 +64,13 @@ Track Track::parseFrom(const juce::File &file) {
     // get the track's duration
     std::unique_ptr<juce::AudioFormatReader> reader(formatManager.createReaderFor(file));
     if (reader != nullptr) {
+        // log the track's metadata
+        juce::StringPairArray metadata = reader->metadataValues;
+        // loop through and log
+        for (auto &key : metadata.getAllKeys()) {
+            DBG("Metadata: " << key.toStdString() << " = " << metadata[key].toStdString());
+        }
+
         const double durationInSeconds = reader->lengthInSamples / reader->sampleRate;
         duration = durationInSeconds;
     }

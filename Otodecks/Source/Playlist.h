@@ -34,6 +34,5 @@ private:
     std::string searchQuery;
 
     // Constants
-    juce::File playlistFile = juce::File::getSpecialLocation(juce::File::userDocumentsDirectory).getChildFile(
-            "Otodecks/data/playlist.json");
+    juce::File playlistFile = juce::File::getSpecialLocation(juce::File::userDocumentsDirectory).getChildFile("Otodecks/data/playlist.json");
 };

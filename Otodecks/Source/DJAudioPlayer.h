@@ -1,12 +1,3 @@
-/*
-  ==============================================================================
-
-    DJAudioPlayer.h
-    Created: 13 Mar 2020 4:22:22pm
-    Author:  matthew
-
-  ==============================================================================
-*/
 
 #pragma once
 
@@ -40,9 +31,11 @@ public:
     void stop();
 
     bool isLoaded();
+
     bool isPlaying();
 
-    bool isLooping();
+    bool isFinished();
+
     void setLooping(bool shouldLoop);
 
     /** get the relative position of the playhead */

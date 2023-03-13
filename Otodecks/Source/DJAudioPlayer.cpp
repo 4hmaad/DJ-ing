@@ -26,8 +26,7 @@ void DJAudioPlayer::loadURL(juce::URL audioURL) {
     auto *reader = formatManager.createReaderFor(
             audioURL.createInputStream(inputStreamOptions));
 
-    if (reader != nullptr)
-    {
+    if (reader != nullptr) {
         std::unique_ptr<juce::AudioFormatReaderSource> newSource(new juce::AudioFormatReaderSource(reader,
                                                                                                    true));
         transportSource.setSource(newSource.get(), 0, nullptr, reader->sampleRate);
@@ -75,10 +74,12 @@ void DJAudioPlayer::stop() {
     transportSource.stop();
 }
 
-bool DJAudioPlayer::isLooping() {
+bool DJAudioPlayer::isFinished() {
+    return transportSource.getCurrentPosition() >= transportSource.getLengthInSeconds();
 }
 
 void DJAudioPlayer::setLooping(bool shouldLoop) {
+    readerSource->setLooping(shouldLoop);
 }
 
 double DJAudioPlayer::getPositionRelative() {

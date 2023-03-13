@@ -21,12 +21,18 @@ PlaylistComponent::PlaylistComponent(DJAudioPlayer *_player,
     searchBox.setTextToShowWhenEmpty("Search", juce::Colours::grey);
     searchBox.setJustification(juce::Justification::verticallyCentred);
 
-    tableComponent.getHeader().addColumn("#", ColumnIds::idColumnId, 15, 30, -1, juce::TableHeaderComponent::notSortable);
-    tableComponent.getHeader().addColumn("TITLE", ColumnIds::titleColumnId, 250, 30, -1, juce::TableHeaderComponent::notSortable);
-    tableComponent.getHeader().addColumn("ALBUM", ColumnIds::albumColumnId, 80, 30, -1, juce::TableHeaderComponent::notSortable);
-    tableComponent.getHeader().addColumn("DURATION", ColumnIds::durationColumnId, 20, 20, -1, juce::TableHeaderComponent::notSortable);
-    tableComponent.getHeader().addColumn("", ColumnIds::actionEditColumnId, 25, 25, -1, juce::TableHeaderComponent::notSortable);
-    tableComponent.getHeader().addColumn("", ColumnIds::actionDeleteColumnId, 25, 25, -1, juce::TableHeaderComponent::notSortable);
+    tableComponent.getHeader().addColumn("#", ColumnIds::idColumnId, 15, 30, -1,
+                                         juce::TableHeaderComponent::notSortable);
+    tableComponent.getHeader().addColumn("TITLE", ColumnIds::titleColumnId, 250, 30, -1,
+                                         juce::TableHeaderComponent::notSortable);
+    tableComponent.getHeader().addColumn("ALBUM", ColumnIds::albumColumnId, 80, 30, -1,
+                                         juce::TableHeaderComponent::notSortable);
+    tableComponent.getHeader().addColumn("DURATION", ColumnIds::durationColumnId, 20, 20, -1,
+                                         juce::TableHeaderComponent::notSortable);
+    tableComponent.getHeader().addColumn("", ColumnIds::actionEditColumnId, 25, 25, -1,
+                                         juce::TableHeaderComponent::notSortable);
+    tableComponent.getHeader().addColumn("", ColumnIds::actionDeleteColumnId, 25, 25, -1,
+                                         juce::TableHeaderComponent::notSortable);
     tableComponent.getHeader().setStretchToFitActive(true);
 
 
@@ -47,10 +53,6 @@ PlaylistComponent::~PlaylistComponent() {
 }
 
 void PlaylistComponent::paint(juce::Graphics &g) {
-    // loop through all tracks and log the fileURL
-    for (auto &track : playlist.getTracks()) {
-        DBG(track.getFileURLStr());
-    }
 }
 
 void PlaylistComponent::resized() {
@@ -94,9 +96,9 @@ void PlaylistComponent::paintCell(juce::Graphics &g,
 
     std::map<int, std::string> columnData = {
             {ColumnIds::idColumnId,       std::to_string(rowNumber + 1)},
-            {ColumnIds::titleColumnId,    track.title},
-            {ColumnIds::albumColumnId,    track.album},
-            {ColumnIds::durationColumnId, "02:45"}
+            {ColumnIds::titleColumnId,    track.getTitle()},
+            {ColumnIds::albumColumnId,    track.getAlbum()},
+            {ColumnIds::durationColumnId, track.getParsedDuration()}
     };
     std::string cellColumnContent = columnData[columnId];
 
@@ -190,10 +192,10 @@ void PlaylistComponent::buttonClicked(juce::Button *button) {
                 juce::FileBrowserComponent::canSelectMultipleItems,
                 [this](const juce::FileChooser &chooser) {
                     auto results = chooser.getResults();
-                    if(results.isEmpty()) return;
+                    if (results.isEmpty()) return;
 
                     juce::StringArray trackFiles;
-                    for (auto &result : results) {
+                    for (auto &result: results) {
                         trackFiles.add(result.getFullPathName());
                     }
                     playlist.addTracks(trackFiles);
